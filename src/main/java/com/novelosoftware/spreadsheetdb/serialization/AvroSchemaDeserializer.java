@@ -7,6 +7,9 @@ import org.apache.avro.Schema;
 
 import java.io.IOException;
 
+/**
+ * AvroSchemaDeserializer Adds logic for parse the avro schemas from the JSON payloads
+ */
 public class AvroSchemaDeserializer extends JsonDeserializer<Schema> {
 
     @Override

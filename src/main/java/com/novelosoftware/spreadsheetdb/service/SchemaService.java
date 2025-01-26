@@ -1,12 +1,19 @@
 package com.novelosoftware.spreadsheetdb.service;
 
 import org.springframework.stereotype.Service;
-import com.novelosoftware.spreadsheetdb.dto.SchemaRequest;
+import com.novelosoftware.spreadsheetdb.dto.CreateSchemaRequest;
 
+/**
+ * SchemaService has the business logic which validates an schema creation and
+ * manages storing the schema and caching the schema for record retrieval.
+ */
 @Service
 public class SchemaService {
 
-    public void createSchema(String schemaName, SchemaRequest schemaRequest) {
+    /**
+     * Creates a new table using the requested avro schema.
+     */
+    public void createSchema(String schemaName, CreateSchemaRequest schemaRequest) {
         // Validate schemaName and schemaRequest
         if (schemaName == null || schemaName.isEmpty()) {
             throw new IllegalArgumentException("Schema name cannot be null or empty");

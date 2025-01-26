@@ -6,9 +6,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.avro.Schema;
 
+/**
+ * Jackson config adds custom serialization logic like avro schema parsing.
+ */
 @Configuration
 public class JacksonConfig {
 
+    /**
+     * objectMapper, implements the objectMapper configuration.
+     */
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
