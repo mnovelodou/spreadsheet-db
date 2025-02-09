@@ -1,6 +1,9 @@
 package com.novelosoftware.spreadsheetdb.controller;
 
+import java.io.IOException;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +36,9 @@ public class SchemaController {
         try {
             schemaService.createSchema(schemaName, schemaRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body("Schema created successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
