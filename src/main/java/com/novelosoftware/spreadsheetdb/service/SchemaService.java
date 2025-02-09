@@ -1,6 +1,10 @@
 package com.novelosoftware.spreadsheetdb.service;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Service;
+
+import com.novelosoftware.spreadsheetdb.dao.SchemaDao;
 import com.novelosoftware.spreadsheetdb.dto.CreateSchemaRequest;
 
 /**
@@ -10,10 +14,16 @@ import com.novelosoftware.spreadsheetdb.dto.CreateSchemaRequest;
 @Service
 public class SchemaService {
 
+    private final SchemaDao schemaDao;
+
+    public SchemaService(SchemaDao schemaDao) {
+        this.schemaDao = schemaDao;
+    }
+
     /**
      * Creates a new table using the requested avro schema.
      */
-    public void createSchema(String schemaName, CreateSchemaRequest schemaRequest) {
+    public void createSchema(String schemaName, CreateSchemaRequest schemaRequest) throws IOException {
         // Validate schemaName and schemaRequest
         if (schemaName == null || schemaName.isEmpty()) {
             throw new IllegalArgumentException("Schema name cannot be null or empty");
@@ -34,5 +44,6 @@ public class SchemaService {
         System.out.println("Key Column: " + schemaRequest.getKeyColumn());
 
         // Add logic to store the schema or interact with the database
+        schemaDao.saveSchema(schemaName, schemaRequest.getKeyColumn(), schemaRequest.getAvroSchema());
     }
 }
